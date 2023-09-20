@@ -73,27 +73,3 @@ scores = [executeRound(play) for play in plays]
 
 # Dump
 print("Total score:", sum(scores))
-
-
-# debugging
-#print(scores, "\n", sum(scores))
-# #plays = plays[0:5]
-# #plays = ["C Y"]
-
-# scores = [executeRound(play) for play in plays]
-
-
-# # test = """A Y
-# # B X
-# # C Z"""
-
-# # scores = [executeRound(l) for l in test.splitlines()]
-
-# plays2 = [p.replace('A', 'R').replace('B', 'P').replace('C', 'S')
-#           .replace('X', 'R').replace('Y', 'P').replace('Z', 'S') for p in plays]
-
-
-# print(plays, "\n", plays2, "\n", scores, "\n", sum(scores))
-
-# executeRound("C Y")
-
