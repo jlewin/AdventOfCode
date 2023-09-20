@@ -8,25 +8,54 @@ rock = 1
 paper = 2
 scissors = 3
 
+win = 6
+draw = 3
+lose = 0
+
 # Mapping from known ids to score
 rules = {
     'RAX': 1, 
     'PBY': 2, 
-    'SCZ': 3 }
+    'SCZ': 3 
+}
+
+# Maps what to play for a given lose/win goal
+#   They play rock, you lose with paper, win with 
+play_map = {
+    rock: {
+        win: paper,
+        lose: scissors
+    },
+    paper: {
+        win: scissors,
+        lose: rock
+    },
+    scissors: {
+        win: rock,
+        lose: paper
+    }
+}
 
 # Map all symbols to their numeric constant
 mappings = {c:r for (k, r) in rules.items() for c in k }
+print(mappings)
 
 def executeRound(moves):
     # Remap the unique symbols to their numeric constants
-    elveMove, myMove  = [mappings[m] for m in moves.split(' ')]
+    elveMove, outcome  = [mappings[m] for m in moves.split(' ')]
 
-    win = 6
-    draw = 3
-    lose = 0
+    if (outcome == 1 ):   # X/lose
+        goal = lose
+    elif (outcome == 2 ): # Y/draw
+        goal = draw
+    else:                 # Z/win
+        goal = win
+
+    # Find the win/lose move for the given target outcome
+    myMove = elveMove if goal == draw else play_map[elveMove][goal]
 
     # The amount you score is simply the constant value of the move
-    moveScore = myMove 
+    moveScore = myMove
 
     if elveMove == myMove:
         winnings = draw
