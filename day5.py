@@ -11,11 +11,13 @@ stacks = [split_by(4, line) for line in crate_lines]
 
 # Transposing 2D list, drop empty values
 stacks = [[row[i] for row in stacks if len(row[i])] for i in range(len(stacks[0]))]
-print(stacks)
+#print(stacks)
 
 def dump():
-    for r in range(0, 9):
-        for c in range(0, 9):
+    row_count = max([len(stacks[c]) for c in range(0, 9)])
+
+    for r in range(row_count):
+        for c in range(9):
             stack = stacks[c]
 
             if r == 0:
@@ -25,6 +27,8 @@ def dump():
             else:
                 print("    ", end='')
         print('')
+
+    print()
 
 dump()
 
@@ -37,11 +41,10 @@ for line in moves:
     move_to = int(segments[5]) - 1
 
     # Move n crates from -> to
-    for i in range(1, count + 1):
-        crate = stacks[move_from].pop()
-        stacks[move_to].append(crate)
+    removed_crates = [stacks[move_from].pop() for x in range(count)]
+    removed_crates.reverse()
+    stacks[move_to].extend(removed_crates)
 
-    # So helpful for finding the off by one error due to range(n, non-inclusive-n)
     #print(line)
     #dump()
 
@@ -51,3 +54,4 @@ print()
 for c in range(0, 9):
     stack = stacks[c]
     print(stack[-1].removeprefix("[").removesuffix("]"), end='')
+print()
