@@ -29,16 +29,15 @@ for r in range(rows):
 
         # Part 2
         def visible_trees_distance(items):
-            visible = []
             distance = 0
+
             # Loop over the list items, collecting until threshold is hit
             for h in items:
                 distance = distance + 1
-                visible.append((distance, h))
                 if h >= height:
                     break;
-            return distance
 
+            return distance
             #result =  list(takewhile(lambda sibling_height: sibling_height < height, rev))
 
         # up, left, right, down
